@@ -1,1 +1,6 @@
-/data
+/data/
+/dataset/*
+!/dataset/analysis
+
+*aup3*
+*code-workspace
