@@ -2,5 +2,8 @@
 /dataset/*
 !/dataset/analysis
 
+.vscode/
+__pycache__/
+
 *aup3*
 *code-workspace
