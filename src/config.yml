@@ -1,0 +1,15 @@
+# GENERAL
+MODEL_DIR  : '../model'
+RESULT_DIR : '../result'
+DATASET_DIR: '../dataset'
+
+# FEATURE EXTRACTION
+EXTRACTION_METHOD: 'mel'
+N_FFT            : 8192
+HOP_LENGTH       : 4098
+N_MELS           : 80
+
+# MODEL PARAMS
+KERNEL: 'rbf'
+GAMMA : 'scale'
+NU    : 0.002
