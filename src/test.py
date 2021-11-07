@@ -1,4 +1,5 @@
 import os
+import openpyxl
 from   utils           import load_model
 from   config          import load_config
 from   dataset         import load_test_set
@@ -18,6 +19,25 @@ def _calc_score(test_set):
         with redirect_stdout(log_file):
             print(classification_report(y_true, y_pred, target_names=['-1', '1']))
 
+def _export_prediction_log(test_set):
+    HEADER = ['INDEX', 'FILE_NAME', 'ANSWER', 'PREDICT', 'CORRECT']
+
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.append(HEADER)
+
+    for sample_i, sample in enumerate(test_set):
+        index     = sample_i + 1
+        file_name = sample.name
+        answer    = sample.y_true
+        predict   = sample.y_pred
+        correct   = 'o' if sample.y_true == sample.y_pred else 'x'
+
+        ws.append([index, file_name, answer, predict, correct])
+
+    wb.save(os.path.join(config.RESULT_DIR, 'prediction_log.xlsx'))
+    wb.close()
+
 def test(config):
     model_path    = config.MODEL_DIR + os.sep + 'svm_trained_model.pkl'
     trained_model = load_model(model_path)
@@ -30,6 +50,7 @@ def test(config):
         sample.y_pred = pred_list[sample_i]
 
     _calc_score(test_set)
+    _export_prediction_log(test_set)
 
 
 if __name__ == '__main__':
