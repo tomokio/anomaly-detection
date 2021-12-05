@@ -5,5 +5,8 @@
 .vscode/
 __pycache__/
 
+*pkl
+*txt
+*xlsx*
 *aup3*
 *code-workspace
