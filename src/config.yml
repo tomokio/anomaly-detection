@@ -6,7 +6,7 @@ DATASET_DIR: '../dataset'
 # FEATURE EXTRACTION
 EXTRACTION_METHOD: 'mel'
 N_FFT            : 8192
-HOP_LENGTH       : 4098
+HOP_LENGTH       : 4096
 N_MELS           : 80
 
 # MODEL PARAMS
