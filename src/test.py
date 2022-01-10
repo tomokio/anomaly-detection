@@ -39,13 +39,22 @@ def _export_prediction_log(test_set):
     wb.close()
 
 def test(config):
-    model_path    = config.MODEL_DIR + os.sep + 'svm_trained_model.pkl'
-    trained_model = load_model(model_path)
+    model_path  = config.MODEL_DIR + os.sep + 'svm_first_clf.pkl'
+    first_clf   = load_model(model_path)
 
-    test_set      = load_test_set(config)
-    test_set_X    = [sample.X for sample in test_set]
+    model_path  = config.MODEL_DIR + os.sep + 'svm_second_clf.pkl'
+    second_clf  = load_model(model_path)
 
-    pred_list     = trained_model.predict(test_set_X)
+    test_set    = load_test_set(config)
+    test_set_X  = [sample.X for sample in test_set]
+
+    pred_list   = first_clf.predict(test_set_X)
+    pred_list_2 = second_clf.predict(test_set_X)
+
+    for pred_i, prediction in enumerate(pred_list):
+        if prediction == -1:
+            pred_list[pred_i] = pred_list_2[pred_i]
+
     for sample_i, sample in enumerate(test_set):
         sample.y_pred = pred_list[sample_i]
 
