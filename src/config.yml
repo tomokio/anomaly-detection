@@ -18,3 +18,4 @@ NU    : 0.002
 TESTING_TYPE       : 'dev' # NOTE: 'dev' for development testing, 'final' for the final testing for scoring.
 DEV_NORMAL_SAMPLES : 120
 DEV_ANOMALY_SAMPLES: 30
+ENABLE_SECOND_CLF  : true

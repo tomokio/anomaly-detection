@@ -51,9 +51,10 @@ def test(config):
     pred_list   = first_clf.predict(test_set_X)
     pred_list_2 = second_clf.predict(test_set_X)
 
-    for pred_i, prediction in enumerate(pred_list):
-        if prediction == -1:
-            pred_list[pred_i] = pred_list_2[pred_i]
+    if config.ENABLE_SECOND_CLF:
+        for pred_i, prediction in enumerate(pred_list):
+            if prediction == -1:
+                pred_list[pred_i] = pred_list_2[pred_i]
 
     for sample_i, sample in enumerate(test_set):
         sample.y_pred = pred_list[sample_i]
